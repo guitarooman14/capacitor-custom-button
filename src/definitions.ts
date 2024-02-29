@@ -1,19 +1,20 @@
 import type { PluginListenerHandle } from '@capacitor/core';
 
-export declare type VolumeButtonPressed = { direction: 'up' | 'down' };
-export declare type VolumeButtonPressedListener = ({
-  direction,
-}: VolumeButtonPressed) => void;
+export declare type CustomButtonPressed = { key: number; isGamepadButton: boolean };
+export declare type CustomButtonPressedListener = ({
+  key,
+  isGamepadButton
+}: CustomButtonPressed) => void;
 
-export interface CapacitorVolumeButtonsPlugin {
+export interface CustomButtonPlugin {
   /**
    * Listen for presses on the hardware volume buttons
    *
    * @since 1.0.0
    */
   addListener(
-    event: 'volumeButtonPressed',
-    listenerFunc: VolumeButtonPressedListener,
+    event: 'customButtonPressed',
+    listenerFunc: CustomButtonPressedListener,
   ): Promise<PluginListenerHandle> & PluginListenerHandle;
 
   /**

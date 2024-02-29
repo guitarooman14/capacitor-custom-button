@@ -4,7 +4,7 @@ export default {
     {
       file: 'dist/plugin.js',
       format: 'iife',
-      name: 'capacitorCapacitorVolumeButtons',
+      name: 'customButton',
       globals: {
         '@capacitor/core': 'capacitorExports',
       },

@@ -35,7 +35,7 @@ npx cap sync
 
 <docgen-index>
 
-* [`addListener('volumeButtonPressed', ...)`](#addlistenervolumebuttonpressed)
+* [`addListener('customButtonPressed', ...)`](#addlistenercustombuttonpressed-)
 * [`removeAllListeners()`](#removealllisteners)
 * [Interfaces](#interfaces)
 * [Type Aliases](#type-aliases)
@@ -45,18 +45,18 @@ npx cap sync
 <docgen-api>
 <!--Update the source file JSDoc comments and rerun docgen to update the docs below-->
 
-### addListener('volumeButtonPressed', ...)
+### addListener('customButtonPressed', ...)
 
 ```typescript
-addListener(event: 'volumeButtonPressed', listenerFunc: VolumeButtonPressedListener) => Promise<PluginListenerHandle> & PluginListenerHandle
+addListener(event: 'customButtonPressed', listenerFunc: CustomButtonPressedListener) => Promise<PluginListenerHandle> & PluginListenerHandle
 ```
 
 Listen for presses on the hardware volume buttons
 
 | Param              | Type                                                                                |
 | ------------------ | ----------------------------------------------------------------------------------- |
-| **`event`**        | <code>'volumeButtonPressed'</code>                                                  |
-| **`listenerFunc`** | <code><a href="#volumebuttonpressedlistener">VolumeButtonPressedListener</a></code> |
+| **`event`**        | <code>'customButtonPressed'</code>                                                  |
+| **`listenerFunc`** | <code><a href="#custombuttonpressedlistener">CustomButtonPressedListener</a></code> |
 
 **Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt; & <a href="#pluginlistenerhandle">PluginListenerHandle</a></code>
 
@@ -91,13 +91,13 @@ Removes all listeners for this plugin
 ### Type Aliases
 
 
-#### VolumeButtonPressedListener
+#### CustomButtonPressedListener
 
-<code>({ direction, }: <a href="#volumebuttonpressed">VolumeButtonPressed</a>): void</code>
+<code>({ key, isGamepadButton }: <a href="#custombuttonpressed">CustomButtonPressed</a>): void</code>
 
 
-#### VolumeButtonPressed
+#### CustomButtonPressed
 
-<code>{ direction: 'up' | 'down' }</code>
+<code>{ key: number; isGamepadButton: boolean }</code>
 
 </docgen-api>
