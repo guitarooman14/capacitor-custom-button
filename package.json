@@ -1,6 +1,6 @@
 {
   "name": "capacitor-custom-button",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Hardware volume buttons listener for Capacitor",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
