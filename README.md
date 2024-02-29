@@ -8,25 +8,21 @@ Hardware volume buttons listener for Capacitor
 ## Install
 
 ```bash
-npm install capacitor-volume-buttons
+npm install capacitor-custom-button
 npx cap sync
 ```
 
 ## Quick example
 ```tsx
   useEffect(() => {
-    const onVolumeButtonPressed = ({ direction }: VolumeButtonPressed) => {
-      if (direction === 'up') {
-        console.log('Volume up pressed!');
-      } else {
-        console.log('Volume down pressed!');
-      }
+    const onCustomButtonPressed = ({ key }: CustomButtonPressed) => {
+      console.log(key);
     };
 
-    CapacitorVolumeButtons.addListener('volumeButtonPressed', onVolumeButtonPressed);
+    const listener = CustomButton.addListener('volumeButtonPressed', onVolumeButtonPressed);
 
     return () => {
-      CapacitorVolumeButtons.removeAllListeners();
+      listener.remove();
     };
   }, []);
 ```

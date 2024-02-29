@@ -25,6 +25,7 @@ public class CustomButtonPlugin extends Plugin {
                         if (isKeyDown) {
                             ret.put("key", keyCode);
                             ret.put("isGamepadButton", android.view.KeyEvent.isGamepadButton(keyCode));
+                            notifyListeners(CUSTOM_BUTTON_PRESSED_EVENT, ret);
                             return true;
                         }
 
