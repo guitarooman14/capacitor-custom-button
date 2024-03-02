@@ -15,11 +15,11 @@ npx cap sync
 ## Quick example
 ```tsx
   useEffect(() => {
-    const onCustomButtonPressed = ({ key }: CustomButtonPressed) => {
+    const onCustomButtonPressed = ({ isLongPress }: CustomButtonPressed) => {
       console.log(key);
     };
 
-    const listener = CustomButton.addListener('volumeButtonPressed', onVolumeButtonPressed);
+    const listener = CustomButton.addListener('customButtonPressed', onCustomButtonPressed);
 
     return () => {
       listener.remove();
@@ -89,11 +89,11 @@ Removes all listeners for this plugin
 
 #### CustomButtonPressedListener
 
-<code>({ key, isGamepadButton }: <a href="#custombuttonpressed">CustomButtonPressed</a>): void</code>
+<code>({ isLongPress }: <a href="#custombuttonpressed">CustomButtonPressed</a>): void</code>
 
 
 #### CustomButtonPressed
 
-<code>{ key: number; isGamepadButton: boolean }</code>
+<code>{ isLongPress: boolean }</code>
 
 </docgen-api>

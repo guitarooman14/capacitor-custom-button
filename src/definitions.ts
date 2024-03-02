@@ -1,9 +1,8 @@
 import type { PluginListenerHandle } from '@capacitor/core';
 
-export declare type CustomButtonPressed = { key: number; isGamepadButton: boolean };
+export declare type CustomButtonPressed = { isLongPress: boolean };
 export declare type CustomButtonPressedListener = ({
-  key,
-  isGamepadButton
+  isLongPress
 }: CustomButtonPressed) => void;
 
 export interface CustomButtonPlugin {

@@ -12,26 +12,39 @@ import com.getcapacitor.annotation.CapacitorPlugin;
 public class CustomButtonPlugin extends Plugin {
     public static final String CUSTOM_BUTTON_PRESSED_EVENT = "customButtonPressed";
 
+    private CustomButton implementation;
+
     @Override
     public void load() {
-        getBridge()
-            .getWebView()
-            .setOnKeyListener(
-                new View.OnKeyListener() {
-                    @Override
-                    public boolean onKey(View v, int keyCode, android.view.KeyEvent event) {
-                        boolean isKeyDown = event.getAction() == KeyEvent.ACTION_DOWN;
-                        JSObject ret = new JSObject();
-                        if (isKeyDown) {
-                            ret.put("key", keyCode);
-                            ret.put("isGamepadButton", android.view.KeyEvent.isGamepadButton(keyCode));
-                            notifyListeners(CUSTOM_BUTTON_PRESSED_EVENT, ret);
-                            return true;
-                        }
+        implementation = new CustomButton(getActivity());
+        implementation.seCustomButtonListener(this::notifyCustomButtonListener);
+    }
 
-                        return false;
-                    }
-                }
-            );
+    /**
+     * Clean up callback to prevent leaks.
+     */
+    @Override
+    protected void handleOnDestroy() {
+        implementation.seCustomButtonListener(null);
+    }
+
+    /**
+     * Register the IntentReceiver on resume
+     */
+    @Override
+    protected void handleOnResume() {
+        implementation.startMonitoring(getActivity());
+    }
+
+    /**
+     * Unregister the IntentReceiver on pause to avoid leaking it
+     */
+    @Override
+    protected void handleOnPause() {
+        implementation.stopMonitoring(getActivity());
+    }
+
+    private void notifyCustomButtonListener(JSObject ret) {
+        notifyListeners(CUSTOM_BUTTON_PRESSED_EVENT, ret);
     }
 }
