@@ -1,16 +1,12 @@
-package com.guitarooman14.CustomButton;
+package com.guitarooman14.plugins.CustomButton;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.util.Log;
-import android.view.KeyEvent;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.getcapacitor.JSObject;
 
 public class CustomButton {
