@@ -22,21 +22,6 @@ public class CustomButtonPlugin extends Plugin {
     @Override
     protected void handleOnDestroy() {
         implementation.seCustomButtonListener(null);
-    }
-
-    /**
-     * Register the IntentReceiver on resume
-     */
-    @Override
-    protected void handleOnResume() {
-        implementation.startMonitoring(getActivity());
-    }
-
-    /**
-     * Unregister the IntentReceiver on pause to avoid leaking it
-     */
-    @Override
-    protected void handleOnPause() {
         implementation.stopMonitoring(getActivity());
     }
 

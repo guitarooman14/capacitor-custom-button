@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +27,7 @@ public class CustomButton {
                     @Override
                     public void onReceive(Context context, Intent intent) {
                         if (intent.getAction().equals("com.guitarooman14.CUSTOM_BUTTON")) {
+                            Log.d("PROXIMA Receiver", "CUSTOM BUTTON PRESS Handled");
                             JSObject ret = new JSObject();
                             boolean isLongPress = intent.getBooleanExtra("isLongPress", false);
                             ret.put("isLongPress", isLongPress);
@@ -37,32 +39,12 @@ public class CustomButton {
     }
 
     /**
-     * Return the object that is receiving the callbacks.
-     *
-     * @return
-     */
-    @Nullable
-    public CustomButtonListener getCustomButtonChangeListener() {
-        return customButtonListener;
-    }
-
-    /**
      * Set the object to receive callbacks.
      *
      * @param listener
      */
     public void seCustomButtonListener(@Nullable CustomButtonListener listener) {
         this.customButtonListener = listener;
-    }
-
-    /**
-     * Register a Intent Receiver in the activity.
-     *
-     * @param activity
-     */
-    public void startMonitoring(@NonNull AppCompatActivity activity) {
-        IntentFilter filter = new IntentFilter(Intent.ACTION_MEDIA_BUTTON);
-        activity.registerReceiver(receiver, filter);
     }
 
     /**
