@@ -16,7 +16,7 @@ export class CustomButtonWeb
       return super.addListener(eventName, listenerFunc);
     } else {
       console.log('CustomButtonPlugin is not supported on web or ios');
-      return super.addListener(eventName, listenerFunc);
+      throw this.unimplemented('CustomButtonPlugin is not supported on web or ios');
     }
   }
 }

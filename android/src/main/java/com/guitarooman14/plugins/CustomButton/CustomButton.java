@@ -10,9 +10,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import com.getcapacitor.JSObject;
 
+import java.util.Objects;
+
 public class CustomButton {
     @Nullable
-    private CustomButtonListener customButtonListener;
+    private PttButtonListener pttButtonListener;
+    @Nullable
+    private HeadsetButtonListener headsetButtonListener;
     private BroadcastReceiver receiver;
     /**
      * Create custom button monitoring object.
@@ -26,16 +30,35 @@ public class CustomButton {
                 new BroadcastReceiver() {
                     @Override
                     public void onReceive(Context context, Intent intent) {
-                        if (intent.getAction().equals("com.guitarooman14.CUSTOM_BUTTON")) {
-                            Log.d("PROXIMA Receiver", "CUSTOM BUTTON PRESS Handled");
-                            JSObject ret = new JSObject();
-                            boolean isLongPress = intent.getBooleanExtra("isLongPress", false);
-                            ret.put("isLongPress", isLongPress);
-                            customButtonListener.onCustomButtonPressed(ret);
+                        if (intent.getAction().equals("com.proxima.PTT_BUTTON")) {
+                            Log.d("PROXIMA Receiver", "PTT BUTTON PRESS Handled");
+                            // Récupérez le nom de l'événement
+                            String eventName = null;
+                            boolean isLongPress = false;
+
+                            // parcourez les clés pour trouver l'événement
+                            for (String key : Objects.requireNonNull(intent.getExtras()).keySet()) {
+                                if (key.equals("isPttButtonLongPress") || key.equals("isHeadsetButtonLongPress")) {
+                                    eventName = key;
+                                    isLongPress = intent.getBooleanExtra(key, false);
+                                    break;
+                                }
+                            }
+                            if (eventName != null) {
+                                if (eventName.equals("isPttButtonLongPress")) {
+                                    JSObject ret = new JSObject();
+                                    ret.put("isLongPress", isLongPress);
+                                    pttButtonListener.onPttButtonPressed(ret);
+                                } else {
+                                    JSObject ret = new JSObject();
+                                    ret.put("isLongPress", isLongPress);
+                                    headsetButtonListener.onHeadsetButtonPressed(ret);
+                                }
+                            }
                         }
                     }
                 };
-        activity.registerReceiver(receiver, new IntentFilter("com.guitarooman14.CUSTOM_BUTTON"));
+        activity.registerReceiver(receiver, new IntentFilter("com.proxima.PTT_BUTTON"));
     }
 
     /**
@@ -43,8 +66,17 @@ public class CustomButton {
      *
      * @param listener
      */
-    public void seCustomButtonListener(@Nullable CustomButtonListener listener) {
-        this.customButtonListener = listener;
+    public void setPttButtonListener(@Nullable PttButtonListener listener) {
+        this.pttButtonListener = listener;
+    }
+
+    /**
+     * Set the object to receive callbacks.
+     *
+     * @param listener
+     */
+    public void setHeadsetButtonListener(@Nullable HeadsetButtonListener listener) {
+        this.headsetButtonListener = listener;
     }
 
     /**
@@ -59,7 +91,11 @@ public class CustomButton {
     /**
      * Interface for callbacks when custom button is triggered.
      */
-    interface CustomButtonListener {
-        void onCustomButtonPressed(JSObject keyEvent);
+    interface PttButtonListener {
+        void onPttButtonPressed(JSObject keyEvent);
+    }
+
+    interface HeadsetButtonListener {
+        void onHeadsetButtonPressed(JSObject keyEvent);
     }
 }

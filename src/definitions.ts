@@ -1,19 +1,33 @@
 import type { PluginListenerHandle } from '@capacitor/core';
 
-export declare type CustomButtonPressed = { isLongPress: boolean };
-export declare type CustomButtonPressedListener = ({
+export declare type PttButtonPressed = { isLongPress: boolean };
+export declare type PttButtonPressedListener = ({
   isLongPress
-}: CustomButtonPressed) => void;
+}: PttButtonPressed) => void;
+export declare type HeadSetButtonPressed = { isLongPress: boolean };
+export declare type HeadsetButtonPressedListener = ({
+  isLongPress
+}: HeadSetButtonPressed) => void;
 
 export interface CustomButtonPlugin {
   /**
-   * Listen for presses on the hardware volume buttons
+   * Listen for presses on the hardware CUSTOM PTT button
    *
    * @since 1.0.0
    */
   addListener(
-    event: 'customButtonPressed',
-    listenerFunc: CustomButtonPressedListener,
+    event: 'pttButtonPressed',
+    listenerFunc: PttButtonPressedListener,
+  ): Promise<PluginListenerHandle> & PluginListenerHandle;
+
+  /**
+   * Listen for presses on the hardware HEADSET PTT button
+   *
+   * @since 1.0.0
+   */
+  addListener(
+      event: 'headsetButtonPressed',
+      listenerFunc: HeadsetButtonPressedListener,
   ): Promise<PluginListenerHandle> & PluginListenerHandle;
 
   /**

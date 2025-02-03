@@ -6,14 +6,16 @@ import com.getcapacitor.annotation.CapacitorPlugin;
 
 @CapacitorPlugin(name = "CustomButton")
 public class CustomButtonPlugin extends Plugin {
-    public static final String CUSTOM_BUTTON_PRESSED_EVENT = "customButtonPressed";
+    public static final String PTT_BUTTON_PRESSED_EVENT = "pttButtonPressed";
+    public static final String HEADSET_BUTTON_PRESSED_EVENT = "headsetButtonPressed";
 
     private CustomButton implementation;
 
     @Override
     public void load() {
         implementation = new CustomButton(getActivity());
-        implementation.seCustomButtonListener(this::notifyCustomButtonListener);
+        implementation.setPttButtonListener(this::notifyPttButtonListener);
+        implementation.setHeadsetButtonListener(this::notifyHeadsetButtonListener);
     }
 
     /**
@@ -21,11 +23,16 @@ public class CustomButtonPlugin extends Plugin {
      */
     @Override
     protected void handleOnDestroy() {
-        implementation.seCustomButtonListener(null);
+        implementation.setPttButtonListener(null);
+        implementation.setHeadsetButtonListener(null);
         implementation.stopMonitoring(getActivity());
     }
 
-    private void notifyCustomButtonListener(JSObject ret) {
-        notifyListeners(CUSTOM_BUTTON_PRESSED_EVENT, ret);
+    private void notifyPttButtonListener(JSObject ret) {
+        notifyListeners(PTT_BUTTON_PRESSED_EVENT, ret);
+    }
+
+    private void notifyHeadsetButtonListener(JSObject ret) {
+        notifyListeners(HEADSET_BUTTON_PRESSED_EVENT, ret);
     }
 }
