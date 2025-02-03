@@ -45,15 +45,15 @@ npx cap sync
 ### addListener('pttButtonPressed', ...)
 
 ```typescript
-addListener(event: 'pttButtonPressed', listenerFunc: PttButtonPressedListener) => Promise<PluginListenerHandle> & PluginListenerHandle
+addListener(event: 'pttButtonPressed', listenerFunc: ButtonPressedListener) => Promise<PluginListenerHandle> & PluginListenerHandle
 ```
 
 Listen for presses on the hardware CUSTOM PTT button
 
-| Param              | Type                                                                          |
-| ------------------ | ----------------------------------------------------------------------------- |
-| **`event`**        | <code>'pttButtonPressed'</code>                                               |
-| **`listenerFunc`** | <code><a href="#pttbuttonpressedlistener">PttButtonPressedListener</a></code> |
+| Param              | Type                                                                    |
+| ------------------ | ----------------------------------------------------------------------- |
+| **`event`**        | <code>'pttButtonPressed'</code>                                         |
+| **`listenerFunc`** | <code><a href="#buttonpressedlistener">ButtonPressedListener</a></code> |
 
 **Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt; & <a href="#pluginlistenerhandle">PluginListenerHandle</a></code>
 
@@ -65,15 +65,15 @@ Listen for presses on the hardware CUSTOM PTT button
 ### addListener('headsetButtonPressed', ...)
 
 ```typescript
-addListener(event: 'headsetButtonPressed', listenerFunc: HeadsetButtonPressedListener) => Promise<PluginListenerHandle> & PluginListenerHandle
+addListener(event: 'headsetButtonPressed', listenerFunc: ButtonPressedListener) => Promise<PluginListenerHandle> & PluginListenerHandle
 ```
 
 Listen for presses on the hardware HEADSET PTT button
 
-| Param              | Type                                                                                  |
-| ------------------ | ------------------------------------------------------------------------------------- |
-| **`event`**        | <code>'headsetButtonPressed'</code>                                                   |
-| **`listenerFunc`** | <code><a href="#headsetbuttonpressedlistener">HeadsetButtonPressedListener</a></code> |
+| Param              | Type                                                                    |
+| ------------------ | ----------------------------------------------------------------------- |
+| **`event`**        | <code>'headsetButtonPressed'</code>                                     |
+| **`listenerFunc`** | <code><a href="#buttonpressedlistener">ButtonPressedListener</a></code> |
 
 **Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt; & <a href="#pluginlistenerhandle">PluginListenerHandle</a></code>
 
@@ -108,22 +108,12 @@ Removes all listeners for this plugin
 ### Type Aliases
 
 
-#### PttButtonPressedListener
+#### ButtonPressedListener
 
-<code>({ isLongPress }: <a href="#pttbuttonpressed">PttButtonPressed</a>): void</code>
-
-
-#### PttButtonPressed
-
-<code>{ isLongPress: boolean }</code>
+<code>({ isLongPress }: <a href="#buttonpressed">ButtonPressed</a>): void</code>
 
 
-#### HeadsetButtonPressedListener
-
-<code>({ isLongPress }: <a href="#headsetbuttonpressed">HeadSetButtonPressed</a>): void</code>
-
-
-#### HeadSetButtonPressed
+#### ButtonPressed
 
 <code>{ isLongPress: boolean }</code>
 
